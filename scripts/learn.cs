@@ -24,6 +24,9 @@ public class learn : MonoBehaviour
         a01.avg(50, 60);
         Test a02 = new Test("Tanaka");
         a02.avg(10, 90);
+        Enemies tomato = new Enemies("tomato", 15, 1, 
+        "image/tomato.png", "image/tomato_left.png"); 
+        Debug.Log(tomato.name);
         
     }
 
