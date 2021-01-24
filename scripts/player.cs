@@ -50,7 +50,7 @@ public class player : MonoBehaviour
 
     
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnCollisionStay2D(Collision2D col)
     {
         if (col.gameObject.tag == "floor" || col.gameObject.tag == "wall")
         {
