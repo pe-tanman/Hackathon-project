@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Tomato : MonoBehaviour
 {
-    GameObject object_tomato;
-        
+    GameObject object_tomato;    
     int dir_tomato = 1;
+    public static float hp;
+    bool first = true;
 
-    Enemies tomato = new Enemies("tomato", 15,1);
-
+    Enemies tomato = new Enemies("tomato", 3,1);
+    
     void move_Tomato()
     {
         transform.Rotate(new Vector3(0,0,-180 * Time.deltaTime));
@@ -39,10 +40,18 @@ public class Tomato : MonoBehaviour
 
     void Start()
     {
-        
+        hp = tomato.maxHP;
+
     }
     void Update()
     {
         move_Tomato();
+        if(hp <= 0 && first)
+        {
+            tomato.death(this.gameObject);
+            
+            first = false;
+        }
+        
     }
 }

@@ -7,14 +7,16 @@ public class player : MonoBehaviour
     public static int hp = 6; 
     Rigidbody2D rb;
     bool on_floor;
-    float dis_ray = 11;
 
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, dis_ray);
+
+    
+    
 
 
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
+        GameObject tomato = this.gameObject;
     }
 
     // Update is called once per frame
@@ -41,28 +43,12 @@ public class player : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
-            
+            attack(100);
         }
     }
 
 
-    void move_player(int num)
-    {
-        if(num == 1)
-        {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        
-            float speed = rb.velocity.x;
-            if(speed*num < 8f)
-            {
-               rb.AddForce(new Vector2(800 *num * Time.deltaTime, 0)); 
-            }
-    }
+    
 
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -79,10 +65,31 @@ public class player : MonoBehaviour
             on_floor = false;
         }
     }
+    void move_player(int num)
+        {
+            float num2 = num * 0.5f;
 
-    void attack()
+            transform.rotation = Quaternion.Euler(0, 180 * (0.5f + num2), 0);
+            
+            float speed = rb.velocity.x;
+            if(speed*num < 8f)
+            {
+                rb.AddForce(new Vector2(800 *num * Time.deltaTime, 0)); 
+            }
+        }
+    void attack(float dis_ray)
     {
+        Ray2D ray = new　Ray2D(transform.position,Vector3.right); 
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, dis_ray);
+        
+        if(hit.collider != null)
+        {
+            if(hit.collider.gameObject.tag == "enemy")
+            {
+                Debug.Log(Tomato.hp);
+                Tomato.hp -= 1;
+            }
+        }
         
     }
-    
 }
