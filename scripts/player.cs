@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class player : MonoBehaviour
 {
     public static int hp = 6; 
+    public GameObject out_line;
     Rigidbody2D rb;
     bool on_floor;
 
     int weapon = 1;
 
     int player_dir = 1;
-
+    float damage = 1.5f;
+    float dis_ray = 1.5f;
     
     
 
@@ -51,18 +54,22 @@ public class player : MonoBehaviour
         }
 
         //攻撃
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            set_weapon(1.5f, 1.5f, -102f);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            set_weapon(3, 1, -3f);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            set_weapon(6, 0.8f, 102f);
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
-            if (weapon == 1){
-                attack(1.5f, 1.5f);
-            }
-            if(weapon == 2){
-                attack(3, 1f);
-            }
-            if(weapon == 3){
-                attack(6, 0.5f);
-            }
-            
+            attack(dis_ray, damage);   
         }
     }
 
@@ -110,5 +117,13 @@ public class player : MonoBehaviour
             }
         }
         
+    }
+    void set_weapon(float dis, float dam, float x)
+    {
+        dis_ray = dis;
+        damage = dam;
+        Vector3 pos = out_line.GetComponent<RectTransform>().anchoredPosition3D;
+        pos.x = x;
+        out_line.GetComponent<RectTransform>().anchoredPosition3D = pos;
     }
 }
