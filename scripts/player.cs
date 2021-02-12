@@ -75,10 +75,15 @@ public class player : MonoBehaviour
 
 
     
-
+    void OnCollisionEnter2D(Collision2D col_enter)
+    {
+        if (col_enter.gameObject.tag == "ground"){
+            on_floor = true;
+        }
+    }
     void OnCollisionStay2D(Collision2D col)
     {
-        if (col.gameObject.tag == "floor" || col.gameObject.tag == "wall")
+        if (col.gameObject.tag == "ground")
         {
             on_floor = true;
         }
@@ -86,7 +91,7 @@ public class player : MonoBehaviour
     }
     void OnCollisionExit2D(Collision2D col_exit)
     {
-        if (col_exit.gameObject.tag == "floor" || col_exit.gameObject.tag == "wall")
+        if (col_exit.gameObject.tag == "ground")
         {
             on_floor = false;
         }
