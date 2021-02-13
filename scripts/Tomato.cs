@@ -8,10 +8,10 @@ public class Tomato : MonoBehaviour
     int dir_tomato = 1;
     public static float hp;
     bool first = true;
-    float speed;
-    float posb, posa;
+    float dis_ray = 0.7f;
+    int layermask = 1 << 29 | 1<<31;//Ground, Player
 
-    Enemies tomato = new Enemies("tomato", 3,1);
+    Enemies tomato = new Enemies("tomato", 1.5f,1);
     
     void move_Tomato()
     {
@@ -21,11 +21,18 @@ public class Tomato : MonoBehaviour
     }
     void bound_tomato()
     {   
+        Ray2D ray = new　Ray2D(transform.position,new Vector2(dir_tomato, 0)); 
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, dis_ray, layermask);
         
-        transform.Rotate(new Vector3(0, 180, 0));
-        Vector3 pos = transform.position;
-        transform.position = new Vector3(pos.x, pos.y + 0.3f, pos.z);
-        dir_tomato *= -1;
+        if(hit.collider != null)
+        {
+            transform.Rotate(new Vector3(0, 180, 0));
+            Vector3 pos = transform.position;
+            transform.position = new Vector3(pos.x, pos.y + 0.3f, pos.z);
+            dir_tomato *= -1;
+            
+        }
+        
     
         
     }
@@ -44,14 +51,9 @@ public class Tomato : MonoBehaviour
     }
     void Update()
     {
-        posb = transform.position.x;
+        
         move_Tomato();
-        posa = transform.position.x;
-        speed = posb - posa;
-        Debug.Log(speed);
-        if(speed == 0){
-            bound_tomato();
-        }
+        bound_tomato();
         
         if(hp <= 0 && first)
         {

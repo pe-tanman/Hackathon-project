@@ -10,15 +10,11 @@ public class player : MonoBehaviour
     Rigidbody2D rb;
     bool on_floor;
 
-    int weapon = 1;
-
     int player_dir = 1;
     float damage = 1.5f;
     float dis_ray = 1.5f;
+    int layermask = 1<<30;//Enemy
     
-    
-
-
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
@@ -34,12 +30,10 @@ public class player : MonoBehaviour
             if(Input.GetKey(KeyCode.D))
             {
                 move_player(1);
-                player_dir = 1;
             }
             if(Input.GetKey(KeyCode.A))
             {
                 move_player(-1);
-                player_dir = -1;
             }
             if(Input.GetKeyDown(KeyCode.Space))
             {
@@ -53,7 +47,7 @@ public class player : MonoBehaviour
             Debug.Log("gameover");
         }
 
-        //攻撃
+        //武器選択
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             set_weapon(1.5f, 1.5f, -102f);
@@ -66,7 +60,7 @@ public class player : MonoBehaviour
         {
             set_weapon(6, 0.8f, 102f);
         }
-
+        //攻撃
         if (Input.GetMouseButtonDown(0))
         {
             attack(dis_ray, damage);   
@@ -98,6 +92,7 @@ public class player : MonoBehaviour
     }
     void move_player(int num)
         {
+            player_dir= num;
             float num2 = num * 0.5f;
 
             transform.rotation = Quaternion.Euler(0, 180 * (0.5f + num2), 0);
@@ -111,15 +106,12 @@ public class player : MonoBehaviour
     void attack(float dis_ray, float damage)
     {
         Ray2D ray = new　Ray2D(transform.position,new Vector2(player_dir, 0)); 
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, dis_ray);
+        
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, dis_ray, layermask);
         
         if(hit.collider != null)
         {
-            if(hit.collider.gameObject.tag == "enemy")
-            {
-                Debug.Log("Tomato.hp=" + Tomato.hp);
-                Tomato.hp -= damage;
-            }
+            Tomato.hp -= damage;
         }
         
     }
