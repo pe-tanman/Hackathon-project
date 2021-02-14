@@ -11,7 +11,6 @@ public class corn_tubu : MonoBehaviour
         if(col.gameObject.tag == "Player")
         {
             player.RevDamage(dam);
-            Debug.Log(dam);
         }
         if (col.gameObject.tag == "ground")
         {

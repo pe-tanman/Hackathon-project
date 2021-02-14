@@ -35,7 +35,6 @@ public class Tomato : MonoBehaviour
     void RevDamage(float dam)
     {
         hp -= dam;
-        Debug.Log("now hp is"+ hp);
         if(hp <= 0)
         {
             tomato.death(this.gameObject);
