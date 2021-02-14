@@ -41,12 +41,6 @@ public class player : MonoBehaviour
             }
         }
 
-        //ゲームオーバー
-        if (hp <= 0)
-        {
-            Debug.Log("gameover");
-        }
-
         //武器選択
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -111,7 +105,7 @@ public class player : MonoBehaviour
         
         if(hit.collider != null)
         {
-            Tomato.hp -= damage;
+            hit.collider.SendMessage("RevDamage", damage);
         }
         
     }
@@ -123,8 +117,13 @@ public class player : MonoBehaviour
         pos.x = x;
         out_line.GetComponent<RectTransform>().anchoredPosition3D = pos;
     }
-    void RevDamage(float dam)
+    public static void RevDamage(float dam)
     {
         hp -= dam;
+
+        if (hp <= 0)
+        {
+            Debug.Log("gameover");
+        }
     }
 }

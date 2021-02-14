@@ -7,7 +7,6 @@ public class Tomato : MonoBehaviour
     public Rigidbody2D rid_tomato;   
     int dir_tomato = 1;
     public static float hp;
-    bool first = true;
     float dis_ray = 0.7f;
     int layermask = 1 << 29 | 1<<31;//Ground, Player
 
@@ -29,39 +28,36 @@ public class Tomato : MonoBehaviour
             transform.Rotate(new Vector3(0, 180, 0));
             Vector3 pos = transform.position;
             transform.position = new Vector3(pos.x, pos.y + 0.3f, pos.z);
-            dir_tomato *= -1;
-            
+            dir_tomato *= -1;  
         }
         
-    
+    }
+    void RevDamage(float dam)
+    {
+        hp -= dam;
+        Debug.Log("now hp is"+ hp);
+        if(hp <= 0)
+        {
+            tomato.death(this.gameObject);
+        }
         
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            player.hp -= tomato.attack;
+            player.RevDamage(tomato.attack);
         }
     } 
 
     void Start()
     {
         hp = tomato.maxHP;
-
     }
     void Update()
     {
         
         move_Tomato();
         bound_tomato();
-        
-        if(hp <= 0 && first)
-        {
-            tomato.death(this.gameObject);
-            
-            first = false;
-        }
-        
-        
     }
 }

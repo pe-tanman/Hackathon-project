@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Corn : MonoBehaviour
 {
-    float pos_dif, player_pos, corn_pos, hp;
-    static public float damage;
+    float pos_dif, player_pos, corn_pos;
+    static public float damage = 1;
+    float hp = 2;
     int corn_dir;
     bool first = true;
     public GameObject player, corn_tubu;
@@ -44,14 +45,17 @@ public class Corn : MonoBehaviour
     void RevDamage(float dam)
     {
         hp -= dam;
+        if(hp <= 0)
+        {
+            corn.death(this.gameObject);
+        }
     }
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         rb_tubu = corn_tubu.GetComponent<Rigidbody2D>();
         InvokeRepeating("attack_Corn", 4,3f);
-        hp = corn.maxHP;
-        damage = corn.attack;
+        
     }
 
     // Update is called once per frame

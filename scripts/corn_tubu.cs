@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class corn_tubu : MonoBehaviour
 {
+    float dam = Corn.damage;
     void OnCollisionEnter2D(Collision2D col)
     {
         
-        if(col.gameObject.tag == "Pkamiglayer")
+        if(col.gameObject.tag == "Player")
         {
-            player.hp -= Corn.damage;
-            Debug.Log("ok");
+            player.RevDamage(dam);
+            Debug.Log(dam);
         }
         if (col.gameObject.tag == "ground")
         {
