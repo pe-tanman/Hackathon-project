@@ -37,7 +37,7 @@ public class player : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                rb.AddForce(new Vector2(0,300f));
+                rb.AddForce(new Vector2(0,400f));
             }
         }
 
@@ -122,5 +122,9 @@ public class player : MonoBehaviour
         Vector3 pos = out_line.GetComponent<RectTransform>().anchoredPosition3D;
         pos.x = x;
         out_line.GetComponent<RectTransform>().anchoredPosition3D = pos;
+    }
+    void RevDamage(float dam)
+    {
+        hp -= dam;
     }
 }

@@ -41,6 +41,10 @@ public class Corn : MonoBehaviour
         corn_tubu.transform.position = transform.position;
         rb_tubu.AddForce(new Vector2(200f * corn_dir, 100f));
     }
+    void RevDamage(float dam)
+    {
+        hp -= dam;
+    }
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
