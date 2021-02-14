@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class player : MonoBehaviour
 {
-    public static int hp = 6; 
+    public static float hp = 6f; 
     public GameObject out_line;
     Rigidbody2D rb;
     bool on_floor;

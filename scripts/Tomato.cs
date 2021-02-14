@@ -40,7 +40,7 @@ public class Tomato : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            player.hp -= 1;
+            player.hp -= tomato.attack;
         }
     } 
 

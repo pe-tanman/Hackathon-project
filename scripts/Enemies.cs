@@ -5,8 +5,7 @@ using UnityEngine;
 public class Enemies : MonoBehaviour
 {
     public string name_en;
-    public float maxHP;
-    float attack;
+    public float maxHP, attack;
 
     //static GameObject anime;
 
