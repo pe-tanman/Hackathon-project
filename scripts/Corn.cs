@@ -9,7 +9,8 @@ public class Corn : MonoBehaviour
     float hp = 2;
     int corn_dir;
     bool first = true;
-    public GameObject player, corn_tubu;
+    GameObject player;
+    public GameObject corn_tubu;
     Rigidbody2D rb, rb_tubu;
     Enemies corn = new Enemies("corn", 2,1f);
 
@@ -52,6 +53,7 @@ public class Corn : MonoBehaviour
     }
     void Start()
     {
+        player = GameObject.Find("player"); 
         rb = this.GetComponent<Rigidbody2D>();
         rb_tubu = corn_tubu.GetComponent<Rigidbody2D>();
         InvokeRepeating("attack_Corn", 4,3f);

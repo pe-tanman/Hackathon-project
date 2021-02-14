@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tomato : MonoBehaviour
 {
-    public Rigidbody2D rid_tomato;   
+    public Rigidbody2D rid_tomato; 
     int dir_tomato = 1;
     public static float hp;
     float dis_ray = 0.7f;
@@ -55,8 +55,7 @@ public class Tomato : MonoBehaviour
         hp = tomato.maxHP;
     }
     void Update()
-    {
-        
+    {   
         move_Tomato();
         bound_tomato();
     }
