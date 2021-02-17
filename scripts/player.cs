@@ -19,7 +19,6 @@ public class player : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody2D>();
         GameObject tomato = this.gameObject;
-        Debug.Log(Tomato.hp);
     }
 
     // Update is called once per frame

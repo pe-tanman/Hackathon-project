@@ -9,7 +9,12 @@ public class camera : MonoBehaviour
 
     void Update()
     {
+        
         float pos = player.transform.position.x;
-        transform.position = new Vector3(pos, 0, -10);
+        if(pos > 0)
+        {
+            transform.position = new Vector3(pos, 0, -10);
+        }
+        
     }
 }
