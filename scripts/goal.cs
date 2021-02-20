@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class goal : MonoBehaviour
 {
-    
-    public GameObject gorl_pannel;
+    public GameObject gorl_pannel, GameMaster;
     // Start is called before the first frame update
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
             Save.save1(100);
-            gorl_pannel.SetActive(true);
-            Time.timeScale = 0f;
+            GameMaster.GetComponent<GM>().OutPanel(gorl_pannel);
         }
         
     }
+
     void Start()
     {
 

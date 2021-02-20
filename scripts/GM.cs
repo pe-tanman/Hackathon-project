@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using System.IO;
+using UnityEngine.UI;
 
 public class GM : MonoBehaviour
 {
-    public GameObject pausePanel;
-    public GameObject player;
+    public GameObject pausePanel, GameoverPanel, Player;
+    public Slider slider;
+    public static int savepoint;
     bool pause = false;
+    float hp;
     void Start()
     {
         
@@ -18,28 +21,33 @@ public class GM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        HPBar();
+
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(!pause)
-            {
-                Time.timeScale = 0f;
-                pausePanel.SetActive(true);
-                pause = true;
-            }
-            else
-            {
-                reset_pause();
-            }
+           OutPanel(pausePanel); 
         }
         
+    }
+    public void OutPanel(GameObject panel)
+    {
+        if(!pause)
+        {
+            Time.timeScale = 0f;
+            panel.SetActive(true);
+            pause = true;
+        }
+        else
+        {
+            reset_pause();
+        }
     }
     public void Restart()
     {
         Debug.Log("restart");
         reset_pause();
         Debug.Log(Save.load1());
-        player.transform.position = new Vector3(-5, 0, -1);
+        Player.transform.position = new Vector3(-5, 0, -1);
     }
     public void Stage()
     {
@@ -51,23 +59,31 @@ public class GM : MonoBehaviour
         reset_pause();
         SceneManager.LoadScene("TitleScene");
     }
-    void reset_pause ()
+    public void reset_pause ()
     {
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
         pause = false;
     }
+    void HPBar()
+    {
+        hp = player.hp;
+        hp /= 6;
+　　　　　slider.value = hp;
+    }
+
 }
 public class Data
 {
     public int point;
+    public int stage;
 }
 public class Save : MonoBehaviour
 {
     public static void save1(int savepoint)
     {
         Data data = new Data();
-        data.point = savepoint;
+        data.stage = savepoint;
         save2(data);
     }
     public static void save2(Data data)
@@ -82,7 +98,7 @@ public class Save : MonoBehaviour
     public static int load1 ()
     {
         Data data = Load2();
-        return data.point;
+        return data.stage;
     }
     public static Data Load2()
     {
@@ -98,7 +114,7 @@ public class Save : MonoBehaviour
         else//ファイルがなかったら
         {
             Data data = new Data();//データのインスタンス化
-            data.point = 400;
+            data.stage = 0;
             return data;
         }
     }

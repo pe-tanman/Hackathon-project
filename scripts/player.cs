@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class player : MonoBehaviour
 {
     public static float hp = 6f; 
-    public GameObject out_line;
+    public GameObject out_line, GameMaster, GameoverPanel;
     Rigidbody2D rb;
     bool on_floor;
 
@@ -116,13 +116,14 @@ public class player : MonoBehaviour
         pos.x = x;
         out_line.GetComponent<RectTransform>().anchoredPosition3D = pos;
     }
-    public static void RevDamage(float dam)
+    public void RevDamage(float dam)
     {
         hp -= dam;
 
         if (hp <= 0)
         {
-            Debug.Log("gameover");
+            GameMaster.GetComponent<GM>().OutPanel(GameoverPanel);
         }
+
     }
 }

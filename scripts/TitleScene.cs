@@ -21,4 +21,8 @@ public class TitleScene : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void OnLoad()
+    {
+        SceneManager.LoadScene(1);
+    }
 }

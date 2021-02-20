@@ -5,14 +5,14 @@ using UnityEngine;
 public class Corn : MonoBehaviour
 {
     float pos_dif, player_pos, corn_pos;
-    static public float damage = 1;
-    float hp = 2;
+    static public float damage = 0.5f;
+    float hp = 1.5f;
     int corn_dir;
     bool first = true;
     GameObject player;
     public GameObject corn_tubu;
     Rigidbody2D rb, rb_tubu;
-    Enemies corn = new Enemies("corn", 2,1f);
+    Enemies corn = new Enemies("corn", 1.5f,0.5f);
 
     void move_Corn()
     {

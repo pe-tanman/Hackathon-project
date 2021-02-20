@@ -5,12 +5,13 @@ using UnityEngine;
 public class Tomato : MonoBehaviour
 {
     public Rigidbody2D rid_tomato; 
+    public GameObject Player;
     int dir_tomato = 1;
     public static float hp;
-    float dis_ray = 0.7f;
+    float dis_ray = 0.56f;
     int layermask = 1 << 29 | 1<<31;//Ground, Player
 
-    Enemies tomato = new Enemies("tomato", 1.5f,1);
+    Enemies tomato = new Enemies("tomato", 2f,1);
     
     void move_Tomato()
     {
@@ -45,13 +46,14 @@ public class Tomato : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            player.RevDamage(tomato.attack);
+            Player.GetComponent<player>().RevDamage(tomato.attack);
         }
     } 
 
     void Start()
     {
         hp = tomato.maxHP;
+        Player = GameObject.Find ("player");
     }
     void Update()
     {   
