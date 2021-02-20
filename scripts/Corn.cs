@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Corn : MonoBehaviour
 {
+    public GameObject corn_tubu;
+    Rigidbody2D rb, rb_tubu;
+    static public Enemies corn;
+    
     float pos_dif, player_pos, corn_pos;
-    static public float damage = 0.5f;
     float hp = 1.5f;
     int corn_dir;
     bool first = true;
-    GameObject player;
-    public GameObject corn_tubu;
-    Rigidbody2D rb, rb_tubu;
-    Enemies corn = new Enemies("corn", 1.5f,0.5f);
+    
 
     void move_Corn()
     {
-        player_pos = player.transform.position.x;
+        player_pos = corn.player.transform.position.x;
         corn_pos = transform.position.x;
         pos_dif = player_pos - corn_pos;
         if (pos_dif > 0)
@@ -45,15 +45,11 @@ public class Corn : MonoBehaviour
     }
     void RevDamage(float dam)
     {
-        hp -= dam;
-        if(hp <= 0)
-        {
-            corn.death(this.gameObject);
-        }
+        corn.RevDamage(dam);
     }
     void Start()
     {
-        player = GameObject.Find("player"); 
+        corn = new Enemies("corn", 1.5f,0.5f, this.gameObject);
         rb = this.GetComponent<Rigidbody2D>();
         rb_tubu = corn_tubu.GetComponent<Rigidbody2D>();
         InvokeRepeating("attack_Corn", 4,3f);

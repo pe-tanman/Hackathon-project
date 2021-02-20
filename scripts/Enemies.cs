@@ -5,22 +5,37 @@ using UnityEngine;
 public class Enemies : MonoBehaviour
 {
     public string name_en;
-    public float maxHP, attack;
+    public float hp, damage;
+    public GameObject player;
+    GameObject GameObject;
 
     //static GameObject anime;
 
     public Enemies(string name, float maxHP, 
-    float attack)
+    float damage, GameObject go)
     {
         this.name_en = name;
-        this.maxHP = maxHP;
-        this.attack = attack;
+        this.hp = maxHP;
+        this.damage = damage;
+        this.GameObject = go;
     }
-    public void death(GameObject obj)
+    public void death()
     {
-        var prefab  = Resources.Load<GameObject>("death_anime");
+        //var prefab  = Resources.Load<GameObject>("death_anime");
         //anime = Instantiate(prefab, obj.transform.position, Quaternion.identity);
-        Destroy(obj);
+        Destroy(GameObject);
+    }
+    public void attack()
+    {
+        player.GetComponent<player>().RevDamage(damage);
+    }
+    public void RevDamage(float dam)
+    {
+        hp -= dam;
+        if(hp <= 0)
+        {
+            death();
+        }
     }
 
 }
