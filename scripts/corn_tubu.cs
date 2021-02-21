@@ -9,7 +9,7 @@ public class corn_tubu : MonoBehaviour
         
         if(col.gameObject.tag == "Player")
         {
-            Corn.corn.attack();
+            transform.parent.gameObject.SendMessage("attack");
         }
         if (col.gameObject.tag == "ground")
         {

@@ -22,7 +22,7 @@ public class Enemies : MonoBehaviour
     }
     public void death()
     {
-        Debug.Log(GO);
+        
         //var prefab  = Resources.Load<GameObject>("death_anime");
         //anime = Instantiate(prefab, obj.transform.position, Quaternion.identity);
         Destroy(GO);

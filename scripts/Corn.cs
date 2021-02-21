@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Corn : MonoBehaviour
 {
     public GameObject corn_tubu;
     Rigidbody2D rb, rb_tubu;
-    public static Enemies corn;
+    public Enemies corn;
     
     float pos_dif, player_pos, corn_pos;
-    float hp = 1.5f;
     int corn_dir;
     bool first = true;
     
@@ -44,17 +44,23 @@ public class Corn : MonoBehaviour
         corn_tubu.transform.position = transform.position;
 
     }
+
     void RevDamage(float dam)
     {
+        Debug.Log(corn.GO);
         corn.RevDamage(dam);
     }
+    void attack()
+    {
+        corn.attack();
+    }
+    
     void Start()
     {
-        corn = new Enemies("corn", 1.5f,0.5f, this.gameObject);
+        corn = new Enemies("corn", 2f,0.5f, this.gameObject);
         rb = this.GetComponent<Rigidbody2D>();
         rb_tubu = corn_tubu.GetComponent<Rigidbody2D>();
-        InvokeRepeating("attack_Corn", 4,3f);
-        Debug.Log(corn.GO);   
+        InvokeRepeating("attack_Corn", 4,3f);  
     }
 
     // Update is called once per frame

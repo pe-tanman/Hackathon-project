@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tomato : MonoBehaviour
-{
-    public Rigidbody2D rid_tomato; 
+{ 
     Enemies tomato;
 
     int dir_tomato = 1;

@@ -18,7 +18,6 @@ public class player : MonoBehaviour
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        GameObject tomato = this.gameObject;
     }
 
     // Update is called once per frame
@@ -98,7 +97,7 @@ public class player : MonoBehaviour
         if(hit.collider != null)
         {
             Debug.Log(hit.collider);
-            hit.collider.SendMessage("RevDamage", damage);
+            hit.collider.gameObject.SendMessage("RevDamage", damage);
         }
         
     }
