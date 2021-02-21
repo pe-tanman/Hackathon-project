@@ -6,7 +6,7 @@ public class Corn : MonoBehaviour
 {
     public GameObject corn_tubu;
     Rigidbody2D rb, rb_tubu;
-    static public Enemies corn;
+    public static Enemies corn;
     
     float pos_dif, player_pos, corn_pos;
     float hp = 1.5f;
@@ -40,8 +40,9 @@ public class Corn : MonoBehaviour
     void push_tubu()
     {
         corn_tubu.SetActive(true);
-        corn_tubu.transform.position = transform.position;
         rb_tubu.AddForce(new Vector2(200f * corn_dir, 100f));
+        corn_tubu.transform.position = transform.position;
+
     }
     void RevDamage(float dam)
     {
@@ -53,7 +54,7 @@ public class Corn : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
         rb_tubu = corn_tubu.GetComponent<Rigidbody2D>();
         InvokeRepeating("attack_Corn", 4,3f);
-        
+        Debug.Log(corn.GO);   
     }
 
     // Update is called once per frame

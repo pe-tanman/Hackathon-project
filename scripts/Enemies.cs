@@ -6,8 +6,8 @@ public class Enemies : MonoBehaviour
 {
     public string name_en;
     public float hp, damage;
+    public GameObject GO;
     public GameObject player;
-    GameObject GameObject;
 
     //static GameObject anime;
 
@@ -17,13 +17,15 @@ public class Enemies : MonoBehaviour
         this.name_en = name;
         this.hp = maxHP;
         this.damage = damage;
-        this.GameObject = go;
+        this.GO = go;
+        player = GameObject.Find("player");
     }
     public void death()
     {
+        Debug.Log(GO);
         //var prefab  = Resources.Load<GameObject>("death_anime");
         //anime = Instantiate(prefab, obj.transform.position, Quaternion.identity);
-        Destroy(GameObject);
+        Destroy(GO);
     }
     public void attack()
     {

@@ -47,6 +47,7 @@ public class GM : MonoBehaviour
         Debug.Log("restart");
         reset_pause();
         Debug.Log(Save.load1());
+        SceneManager.LoadScene(1);
         Player.transform.position = new Vector3(-5, 0, -1);
     }
     public void Stage()

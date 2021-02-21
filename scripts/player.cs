@@ -64,24 +64,17 @@ public class player : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D col_enter)
     {
-        if (col_enter.gameObject.tag == "ground"){
-            on_floor = true;
-        }
+        on_floor = true;
     }
     void OnCollisionStay2D(Collision2D col)
     {
-        if (col.gameObject.tag == "ground")
-        {
-            on_floor = true;
-        }
-        
+
+        on_floor = true;
+    
     }
     void OnCollisionExit2D(Collision2D col_exit)
     {
-        if (col_exit.gameObject.tag == "ground")
-        {
-            on_floor = false;
-        }
+        on_floor = false;
     }
     void move_player(int num)
         {
@@ -104,6 +97,7 @@ public class player : MonoBehaviour
         
         if(hit.collider != null)
         {
+            Debug.Log(hit.collider);
             hit.collider.SendMessage("RevDamage", damage);
         }
         
