@@ -10,7 +10,6 @@ public class GM : MonoBehaviour
 {
     public GameObject pausePanel, GameoverPanel, Player;
     public Slider slider;
-    public static int savepoint;
     bool pause = false;
     float hp;
     void Start()
@@ -25,45 +24,45 @@ public class GM : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-           OutPanel(pausePanel); 
+            if(!pause)
+            {
+                OutPanel(pausePanel); 
+            }
+            else{
+                reset_panel(pausePanel);
+            }
+           
         }
         
     }
-    public void OutPanel(GameObject panel)
-    {
-        if(!pause)
-        {
-            Time.timeScale = 0f;
-            panel.SetActive(true);
-            pause = true;
-        }
-        else
-        {
-            reset_pause();
-        }
-    }
     public void Restart()
     {
-        Debug.Log("restart");
-        reset_pause();
-        Debug.Log(Save.load1());
+        reset_panel(pausePanel);
         SceneManager.LoadScene(1);
         Player.transform.position = new Vector3(-5, 0, -1);
     }
     public void Stage()
     {
-        reset_pause();
-        Debug.Log("stage select");
+        reset_panel(pausePanel);
     }
     public void Title()
     {
-        reset_pause();
+        reset_panel(pausePanel);
         SceneManager.LoadScene("TitleScene");
     }
-    public void reset_pause ()
+    public void OutPanel(GameObject panel)
+    {
+
+        Time.timeScale = 0f;
+        panel.SetActive(true);
+        pause = true;
+
+    }
+
+    public void reset_panel (GameObject panel)
     {
         Time.timeScale = 1f;
-        pausePanel.SetActive(false);
+        panel.SetActive(false);
         pause = false;
     }
     void HPBar()
@@ -72,7 +71,12 @@ public class GM : MonoBehaviour
         hp /= 6;
 　　　　　slider.value = hp;
     }
-
+    public void OnContinue()
+    {
+       reset_panel(GameoverPanel);
+       SceneManager.LoadScene(1);
+    }
+    
 }
 public class Data
 {

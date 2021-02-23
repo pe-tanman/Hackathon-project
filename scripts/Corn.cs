@@ -47,7 +47,6 @@ public class Corn : MonoBehaviour
 
     void RevDamage(float dam)
     {
-        Debug.Log(corn.GO);
         corn.RevDamage(dam);
     }
     void attack()

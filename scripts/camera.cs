@@ -13,7 +13,7 @@ public class camera : MonoBehaviour
         float pos = player.transform.position.x;
         if(pos > 0)
         {
-            transform.position = new Vector3(pos, 0, -10);
+            transform.position = new Vector3(pos, 0, -9);
         }
         
     }

@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class player : MonoBehaviour
 {
-    public static float hp = 6f; 
     public GameObject out_line, GameMaster, GameoverPanel;
     Rigidbody2D rb;
+    
     bool on_floor;
-
+    public static float hp;
     int player_dir = 1;
     float damage = 1.5f;
     float dis_ray = 1.5f;
@@ -17,7 +17,9 @@ public class player : MonoBehaviour
     
     void Start()
     {
+        hp = 6f;
         rb = this.GetComponent<Rigidbody2D>();
+        transform.position = savepoint.start;
     }
 
     // Update is called once per frame
@@ -57,6 +59,8 @@ public class player : MonoBehaviour
         {
             attack(dis_ray, damage);   
         }
+
+        fall();
     }
 
 
@@ -96,7 +100,6 @@ public class player : MonoBehaviour
         
         if(hit.collider != null)
         {
-            Debug.Log(hit.collider);
             hit.collider.gameObject.SendMessage("RevDamage", damage);
         }
         
@@ -110,6 +113,7 @@ public class player : MonoBehaviour
         out_line.GetComponent<RectTransform>().anchoredPosition3D = pos;
     }
     public void RevDamage(float dam)
+
     {
         hp -= dam;
 
@@ -118,5 +122,13 @@ public class player : MonoBehaviour
             GameMaster.GetComponent<GM>().OutPanel(GameoverPanel);
         }
 
+    }
+    void fall()
+    {
+        if(transform.position.y < -5)
+        {
+            transform.position = savepoint.start;
+            RevDamage(hp);
+        }
     }
 }
