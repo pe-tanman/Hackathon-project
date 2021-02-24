@@ -8,7 +8,8 @@ public class player : MonoBehaviour
     public GameObject out_line, GameMaster, GameoverPanel;
     Rigidbody2D rb;
     
-    bool on_floor;
+    bool on_floor, on_trigger;
+    bool can_jump = true;
     public static float hp;
     int player_dir = 1;
     float damage = 1.5f;
@@ -29,15 +30,16 @@ public class player : MonoBehaviour
         if (on_floor){
             if(Input.GetKey(KeyCode.D))
             {
-                move_player(1);
+                move(1);
             }
             if(Input.GetKey(KeyCode.A))
             {
-                move_player(-1);
+                move(-1);
             }
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                rb.AddForce(new Vector2(0,400f));
+                
+                jump();
             }
         }
 
@@ -65,21 +67,20 @@ public class player : MonoBehaviour
 
 
     
-    void OnCollisionEnter2D(Collision2D col_enter)
+    void OnTriggerEnter2D(Collider2D col_enter)
     {
         on_floor = true;
     }
-    void OnCollisionStay2D(Collision2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
-
         on_floor = true;
-    
     }
-    void OnCollisionExit2D(Collision2D col_exit)
+    void OnTriggerExit2D(Collider2D col_exit)
     {
         on_floor = false;
     }
-    void move_player(int num)
+
+    void move(int num)
         {
             player_dir= num;
             float num2 = num * 0.5f;
@@ -104,6 +105,20 @@ public class player : MonoBehaviour
         }
         
     }
+    void jump()
+    {
+        if(can_jump)
+        {
+            rb.AddForce(new Vector2(0,400f));
+            Invoke("get_jump", 0.6f);
+            can_jump = false;
+        }
+    }  
+    void get_jump()
+    {
+        can_jump = true;
+    }
+
     void set_weapon(float dis, float dam, float x)
     {
         dis_ray = dis;
@@ -131,4 +146,5 @@ public class player : MonoBehaviour
             RevDamage(hp);
         }
     }
+    
 }

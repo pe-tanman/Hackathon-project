@@ -7,7 +7,7 @@ public class Corn : MonoBehaviour
 {
     public GameObject corn_tubu;
     Rigidbody2D rb, rb_tubu;
-    public Enemies corn;
+    Enemies corn;
     
     float pos_dif, player_pos, corn_pos;
     int corn_dir;

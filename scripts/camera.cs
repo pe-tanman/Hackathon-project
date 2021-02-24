@@ -10,10 +10,10 @@ public class camera : MonoBehaviour
     void Update()
     {
         
-        float pos = player.transform.position.x;
-        if(pos > 0)
+        Vector3 pos = player.transform.position;
+        if(pos.x > 0)
         {
-            transform.position = new Vector3(pos, 0, -9);
+            transform.position = new Vector3(pos.x, pos.y, -9);
         }
         
     }
