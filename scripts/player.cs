@@ -116,7 +116,7 @@ public class player : MonoBehaviour
         
         RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, dis_ray, layermask);
         
-        if(hit.collider != null)
+        if(hit.collider != null);
         {
             hit.collider.gameObject.SendMessage("RevDamage", damage);
         }

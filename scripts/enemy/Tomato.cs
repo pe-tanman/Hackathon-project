@@ -30,7 +30,6 @@ public class Tomato : MonoBehaviour
             foreach (RaycastHit2D hit in Physics2D.RaycastAll((Vector2)ray.origin, (Vector2)ray.direction, dis_ray)) {
             if (hit) 
             {
-                Debug.Log("hit");
                 if (hit.collider != this.gameObject.GetComponent<Collider2D>())
                 {
                     transform.Rotate(new Vector3(0, 180, 0));
