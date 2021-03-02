@@ -14,7 +14,7 @@ public class GM : MonoBehaviour
     float hp;
     void Start()
     {
-        
+        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame

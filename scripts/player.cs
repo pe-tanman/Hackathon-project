@@ -7,13 +7,15 @@ public class player : MonoBehaviour
 {
     public GameObject out_line, GameMaster, GameoverPanel;
     Rigidbody2D rb;
-    
-    bool on_floor, on_trigger;
-    bool can_jump = true;
-    public static float hp;
-    int player_dir = 1;
+    public static float hp; 
+    float player_dir = 1;
     float damage = 1.5f;
     float dis_ray = 1.5f;
+    bool can_jump = true;
+    
+    float num = 0.1f;
+
+    public static bool have_key = false;
     int layermask = 1<<30;//Enemy
     
     void Start()
@@ -27,22 +29,23 @@ public class player : MonoBehaviour
     void Update()
     {
         //移動
-        if (on_floor){
-            if(Input.GetKey(KeyCode.D))
+        if(Input.GetKey(KeyCode.D))
+        {
+            move(num);
+        }
+        if(Input.GetKey(KeyCode.A))
+        {
+            move(num * -1);
+        }
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(num == 1 || num == -1)
             {
-                move(1);
-            }
-            if(Input.GetKey(KeyCode.A))
-            {
-                move(-1);
-            }
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                
                 jump();
             }
+                    
         }
-
+    
         //武器選択
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -66,31 +69,45 @@ public class player : MonoBehaviour
     }
 
 
-    
+    //接地判定
     void OnTriggerEnter2D(Collider2D col_enter)
     {
-        on_floor = true;
+        num = 1;
     }
     void OnTriggerStay2D(Collider2D col)
     {
-        on_floor = true;
+        
+        num = 1;
+        if(col.tag == "hashigo")
+        {
+            if(Input.GetKey(KeyCode.Space))
+            {
+                Debug.Log(col.tag);
+                rb.AddForce(new Vector2(0, 5));            }
+        }
     }
     void OnTriggerExit2D(Collider2D col_exit)
     {
-        on_floor = false;
+        num = 0.1f;
     }
 
-    void move(int num)
+    void move(float num2)
         {
-            player_dir= num;
-            float num2 = num * 0.5f;
+            player_dir = num2;
 
-            transform.rotation = Quaternion.Euler(0, 180 * (0.5f + num2), 0);
+            if(num2 > 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
             
             float speed = rb.velocity.x;
             if(speed*num < 8f)
             {
-                rb.AddForce(new Vector2(800 *num * Time.deltaTime, 0)); 
+                rb.AddForce(new Vector2(800 * player_dir * Time.deltaTime, 0)); 
             }
         }
     void attack(float dis_ray, float damage)
@@ -118,7 +135,17 @@ public class player : MonoBehaviour
     {
         can_jump = true;
     }
+    public void RevDamage(float dam)
+        {
+            hp -= dam;
 
+            if (hp <= 0)
+            {
+                GameMaster.GetComponent<GM>().OutPanel(GameoverPanel);
+            }
+
+        }
+    
     void set_weapon(float dis, float dam, float x)
     {
         dis_ray = dis;
@@ -127,17 +154,6 @@ public class player : MonoBehaviour
         pos.x = x;
         out_line.GetComponent<RectTransform>().anchoredPosition3D = pos;
     }
-    public void RevDamage(float dam)
-
-    {
-        hp -= dam;
-
-        if (hp <= 0)
-        {
-            GameMaster.GetComponent<GM>().OutPanel(GameoverPanel);
-        }
-
-    }
     void fall()
     {
         if(transform.position.y < -5)
@@ -145,6 +161,7 @@ public class player : MonoBehaviour
             transform.position = savepoint.start;
             RevDamage(hp);
         }
-    }
     
+    }
+
 }
