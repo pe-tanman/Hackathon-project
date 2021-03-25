@@ -20,11 +20,11 @@ public class Enemies : MonoBehaviour
         this.GO = go;
         player = GameObject.Find("player");
     }
-    public void death()
+    void death()
     {
-        
-        //var prefab  = Resources.Load<GameObject>("death_anime");
-        //anime = Instantiate(prefab, obj.transform.position, Quaternion.identity);
+        GameObject death_anim = (GameObject)Resources.Load("prefabs/death_anime");
+        GameObject anime = Instantiate(death_anim, GO.transform.position, Quaternion.identity);
+        Destroy(anime, 0.27f);
         Destroy(GO);
     }
     public void attack()

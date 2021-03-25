@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class warphole : MonoBehaviour
 {
+    public AudioClip warp;
     public float x,y;
     GameObject player;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,9 @@ public class warphole : MonoBehaviour
         if(col.collider.tag == "Player")
         {
             player.transform.position = new Vector3(x, y, player.transform.position.z);
+
+            AudioSource AS = GetComponent<AudioSource>();
+            AS.PlayOneShot(warp);
         }
     }
 }

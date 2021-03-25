@@ -5,6 +5,7 @@ using UnityEngine;
 public class savepoint : MonoBehaviour
 {
     GameObject player_point;
+    public AudioClip save;
     static public Vector3 start; 
     // Start is called before the first frame update
     void Start()
@@ -18,8 +19,15 @@ public class savepoint : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        player_point = this.gameObject;
-        go_to_pos();
+        if(other.tag == "Player")
+        {
+            AudioSource AS = GetComponent<AudioSource>();
+            AS.PlayOneShot(save);
+
+            player_point = this.gameObject;
+            go_to_pos();
+        }
+        
     }
     void go_to_pos()
     {

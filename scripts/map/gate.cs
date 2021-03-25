@@ -5,8 +5,9 @@ using UnityEngine;
 public class gate : MonoBehaviour
 {
     public Sprite gate_open, gate_close;
+    public AudioClip gate_a;
 
-    bool open_gate = false;
+    public bool open_gate = false;
 
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -36,6 +37,9 @@ public class gate : MonoBehaviour
     }
     public void change()
     {
+        AudioSource AS = GetComponent<AudioSource>();
+        AS.PlayOneShot(gate_a);
+
         if(open_gate)
         {
             close();

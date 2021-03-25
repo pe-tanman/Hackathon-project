@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class TitleScene : MonoBehaviour
 {
@@ -17,8 +18,9 @@ public class TitleScene : MonoBehaviour
     
     }   
 
-    public void OnStart()
+    public void OnNew()
     {
+        File.Delete("Assets/savedata.json");
         SceneManager.LoadScene(1);
     }
     public void OnLoad()

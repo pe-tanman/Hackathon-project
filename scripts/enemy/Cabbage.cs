@@ -5,6 +5,7 @@ using UnityEngine;
 public class Cabbage : MonoBehaviour
 {
     public Enemies cabbage;
+    public AudioClip defence;
     Rigidbody2D rb;
 
     float player_pos, pos_dif;
@@ -29,14 +30,10 @@ public class Cabbage : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
-    void attack()
-    {
-        rb.AddForce(new Vector2(100 * dir, 230));
-        Invoke("turn", 0.9f);
-    }
     void RevDamage(float dam)
     {
-        
+        AudioSource AS = GetComponent<AudioSource>();
+        AS.PlayOneShot(defence);
     }
     
     void OnCollisionEnter2D(Collision2D col)
@@ -49,9 +46,10 @@ public class Cabbage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         cabbage = new Enemies("cabbage", 4f, 2f, this.gameObject);
         rb = this.gameObject.GetComponent<Rigidbody2D>();
-        InvokeRepeating("attack", 4,3f); 
+        InvokeRepeating("turn", 4,5f); 
     }
 
     // Update is called once per frame

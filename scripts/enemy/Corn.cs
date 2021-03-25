@@ -42,7 +42,6 @@ public class Corn : MonoBehaviour
         corn_tubu.SetActive(true);
         rb_tubu.AddForce(new Vector2(200f * corn_dir, 100f));
         corn_tubu.transform.position = transform.position;
-
     }
 
     void RevDamage(float dam)

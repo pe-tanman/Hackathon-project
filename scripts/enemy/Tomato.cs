@@ -8,7 +8,7 @@ public class Tomato : MonoBehaviour
     Vector3 pos;
     Rigidbody2D rb;
     int dir_tomato = 1;
-    float dis_ray = 0.65f;
+    float dis_ray = 0.7f;
     int layermask = 1<<29 | 1<<31;//Ground, Player
     
     
@@ -34,7 +34,7 @@ public class Tomato : MonoBehaviour
                 {
                     transform.Rotate(new Vector3(0, 180, 0));
                     dir_tomato *= -1;  
-                    rb.AddForce (new Vector3(5* dir_tomato, 0, 0), ForceMode2D.Impulse);
+                    //rb.AddForce (new Vector3(5* dir_tomato, 0, 0), ForceMode2D.Impulse);
                 }
             }   
         }

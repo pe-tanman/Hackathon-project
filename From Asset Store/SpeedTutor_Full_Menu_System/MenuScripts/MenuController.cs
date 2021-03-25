@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.IO;
 
 namespace SpeedTutorMainMenuSystem
 {
@@ -246,9 +247,12 @@ namespace SpeedTutorMainMenuSystem
         #region Dialog Options - This is where we load what has been saved in player prefs!
         public void ClickNewGameDialog(string ButtonType)
         {
+            //NewGame
             if (ButtonType == "Yes")
             {
-                SceneManager.LoadScene(_newGameButtonLevel);
+                SceneManager.LoadScene(1);
+                File.Delete("Assets/savedata.json");
+
             }
 
             if (ButtonType == "No")
@@ -259,28 +263,10 @@ namespace SpeedTutorMainMenuSystem
 
         public void ClickLoadGameDialog(string ButtonType)
         {
+            
             if (ButtonType == "Yes")
             {
-                if (PlayerPrefs.HasKey("SavedLevel"))
-                {
-                    Debug.Log("I WANT TO LOAD THE SAVED GAME");
-                    //LOAD LAST SAVED SCENE
-                    levelToLoad = PlayerPrefs.GetString("SavedLevel");
-                    SceneManager.LoadScene(levelToLoad);
-                }
-
-                else
-                {
-                    Debug.Log("Load Game Dialog");
-                    menuDefaultCanvas.SetActive(false);
-                    loadGameDialog.SetActive(false);
-                    noSaveDialog.SetActive(true);
-                }
-            }
-
-            if (ButtonType == "No")
-            {
-                GoBackToMainMenu();
+                SceneManager.LoadScene(1);
             }
         }
         #endregion

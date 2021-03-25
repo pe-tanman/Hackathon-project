@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 19aa84dc9c82537459601640f8560b07
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - sord: {fileID: 8300000, guid: 265c984eb27024b438cf781f842bb05d, type: 3}
+  - yari: {fileID: 8300000, guid: 27e2b7eeb6eab314193bd351fbe7c37b, type: 3}
+  - yumi: {fileID: 8300000, guid: 6d957648ee268314b90f9d1d456926a8, type: 3}
+  - defence: {fileID: 8300000, guid: 56ef6a0db1f15a64f8b072de8f079a12, type: 3}
+  - damage: {fileID: 8300000, guid: 49d4df755e0d09348a9cc805d4073e71, type: 3}
+  - warp: {fileID: 8300000, guid: a4bcbb9e157b4d749889fb9f131a287e, type: 3}
+  - key: {fileID: 8300000, guid: d2f09f2a256207e4b9d1483550e3bf25, type: 3}
+  - save: {fileID: 8300000, guid: 14cfa01f81bf85245a7c1cb91b7306ce, type: 3}
+  - lever: {fileID: 8300000, guid: 6f27e7e11399ab74aadeb2b6e6361acd, type: 3}
+  - gate: {fileID: 8300000, guid: 5571198675e0cd14da2bf00f46689035, type: 3}
+  - gm: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

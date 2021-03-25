@@ -5,6 +5,7 @@ using UnityEngine;
 public class lever : MonoBehaviour
 {
     public Sprite lever_on, lever_off;
+    public AudioClip lever_a;
     public GameObject gate1, gate2, gate3;
     public bool on_lever= false;
     // Start is called before the first frame update
@@ -24,7 +25,17 @@ public class lever : MonoBehaviour
         {   
             if(Input.GetMouseButtonDown(1))
             {
-                change_gate(gate1);
+                Onlever();
+            }
+        }
+    }
+    void Onlever()
+    {
+        change_gate(gate1);
+        
+        AudioSource AS = GetComponent<AudioSource>();
+        AS.PlayOneShot(lever_a);
+
                 change_gate(gate2);
                 change_gate(gate3);
                 if(!on_lever)
@@ -36,9 +47,6 @@ public class lever : MonoBehaviour
                     this.GetComponent<SpriteRenderer>().sprite = lever_off;
                     on_lever = !on_lever; 
                 }
-                
-            }
-        }
     }
     void change_gate(GameObject go)
     {
@@ -46,6 +54,10 @@ public class lever : MonoBehaviour
         {
             go.GetComponent<gate>().change();
         }
+    }
+    void RevDamage()
+    {
+        Onlever();
     }
 
 }

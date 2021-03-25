@@ -10,10 +10,11 @@ public class GM : MonoBehaviour
 {
     public GameObject pausePanel, GameoverPanel, Player;
     public Slider slider;
-    bool pause = false;
+    public bool pause = false;
     float hp;
     void Start()
     {
+        Time.timeScale = 1f;
         Application.targetFrameRate = 60;
     }
 
@@ -33,17 +34,18 @@ public class GM : MonoBehaviour
             }
            
         }
-        
+
     }
     public void Restart()
     {
         reset_panel(pausePanel);
-        SceneManager.LoadScene(1);
-        Player.transform.position = new Vector3(-5, 0, -1);
+        Scene nowScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(nowScene.name);
     }
     public void Stage()
     {
         reset_panel(pausePanel);
+        SceneManager.LoadScene(1);
     }
     public void Title()
     {
@@ -52,7 +54,7 @@ public class GM : MonoBehaviour
     }
     public void OutPanel(GameObject panel)
     {
-
+        
         Time.timeScale = 0f;
         panel.SetActive(true);
         pause = true;
@@ -71,13 +73,24 @@ public class GM : MonoBehaviour
         hp /= 6;
 　　　　　slider.value = hp;
     }
+    
     public void OnContinue()
     {
        reset_panel(GameoverPanel);
-       SceneManager.LoadScene(1);
+       Scene nowScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(nowScene.name);
     }
-    
-}
+    public void onMenuB()
+    {
+        if(!pause)
+            {
+                OutPanel(pausePanel); 
+            }
+        else{
+                reset_panel(pausePanel);
+            }
+    }
+}  
 public class Data
 {
     public int point;
@@ -100,28 +113,4 @@ public class Save : MonoBehaviour
         writer.Flush();
         writer.Close();
     }
-    public static int load1 ()
-    {
-        Data data = Load2();
-        return data.stage;
-    }
-    public static Data Load2()
-    {
-        if(File.Exists(Application.dataPath + "/savedata.json"))
-        {
-            string datastr = "";
-            StreamReader reader;//streamreaderのインスタンス
-            reader = new StreamReader(Application.dataPath + "/savedata.json");
-            datastr = reader.ReadToEnd();
-            reader.Close();
-            return JsonUtility.FromJson<Data>(datastr);
-        }
-        else//ファイルがなかったら
-        {
-            Data data = new Data();//データのインスタンス化
-            data.stage = 0;
-            return data;
-        }
-    }
 }
-    
