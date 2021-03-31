@@ -17,8 +17,10 @@ public class button : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        
         if((other.tag == "Player" || other.tag == "spe_tomato")&& !on)
         {
+            Debug.Log(on);
             On_B();
         }
     }
@@ -27,8 +29,13 @@ public class button : MonoBehaviour
         foreach (var any_gate in gates)
         {
            if(any_gate != null)
-            {
-                any_gate.GetComponent<gate>().change();
+            {   if(any_gate.GetComponent<whole>() != null)
+                {
+                    any_gate.GetComponent<whole>().change();
+                }
+                else{
+                    any_gate.GetComponent<gate>().change();
+                }
             }
         }
         on = true;
@@ -42,8 +49,13 @@ public class button : MonoBehaviour
         foreach (var any_gate in gates)
         {
             if(any_gate != null)
-            {
-                any_gate.GetComponent<gate>().change();
+            {   if(any_gate.GetComponent<whole>() != null)
+                {
+                    any_gate.GetComponent<whole>().change();
+                }
+                else{
+                    any_gate.GetComponent<gate>().change();
+                }
             }
            
         }

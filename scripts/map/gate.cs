@@ -8,7 +8,12 @@ public class gate : MonoBehaviour
     public AudioClip gate_a;
 
     public bool open_gate = false;
+    AudioSource AS;
 
+    void Start()
+    {
+        AS = GetComponent<AudioSource>();
+    }
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.collider.tag == "Player")
@@ -26,6 +31,7 @@ public class gate : MonoBehaviour
     }
     void open()
     {
+        AS.PlayOneShot(gate_a);
         player.have_key = false;
         GetComponent<SpriteRenderer>().sprite = gate_open;
         GetComponent<BoxCollider2D>().enabled = false;
@@ -37,7 +43,6 @@ public class gate : MonoBehaviour
     }
     public void change()
     {
-        AudioSource AS = GetComponent<AudioSource>();
         AS.PlayOneShot(gate_a);
 
         if(open_gate)

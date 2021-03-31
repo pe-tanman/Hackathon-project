@@ -49,7 +49,7 @@ public class Banana : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        banana = new Enemies("cabbage", 1.8f, 0.8f, this.gameObject);
+        banana = new Enemies("cabbage", 1.8f, 1f, this.gameObject);
         rb = this.gameObject.GetComponent<Rigidbody2D>();
         InvokeRepeating("attack", 4,3f); 
         turn();

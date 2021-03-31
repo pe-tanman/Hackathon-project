@@ -54,7 +54,7 @@ public class Tomato : MonoBehaviour
 
     void Start()
     {
-        tomato = new Enemies("tomato", 2f,1, this.gameObject);
+        tomato = new Enemies("tomato", 2f,1.5f, this.gameObject);
         rb = this.GetComponent<Rigidbody2D>();
     }
     void Update()

@@ -44,9 +44,9 @@ public class Boss : MonoBehaviour
     {
         rb.AddForce(new Vector2(250 * dir, 400));
         Invoke("turn", 0.9f);
-        Invoke("change_rotate", 4f);
-        Invoke("change_rotate", 7f);
-        Invoke("jump_up", 12f);
+        Invoke("change_rotate", 11f);
+        Invoke("change_rotate", 14f);
+        Invoke("jump_up",4f);
     }
 
 //tomato
@@ -139,7 +139,7 @@ public class Boss : MonoBehaviour
     void Start()
     {
         tubus = new GameObject[3]{tubu, tubu1, tubu2};
-        boss = new Enemies("boss", 50, 0.8f, this.gameObject);
+        boss = new Enemies("boss", 50, 1.5f, this.gameObject);
         rb = this.gameObject.GetComponent<Rigidbody2D>();
         
         InvokeRepeating("jump", 3f, 17f); 

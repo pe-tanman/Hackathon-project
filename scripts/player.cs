@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class player : MonoBehaviour
 {
-    public GameObject out_line, GameMaster, GameoverPanel;
+    public GameObject out_line, GameMaster, GameoverPanel1, GameoverPanel2;
     public AudioClip sord, yari, bow, dam_audio;
+    RectTransform trans;
     AudioClip[] clips;
     Music music;
     AudioSource AS;
@@ -36,6 +38,9 @@ public class player : MonoBehaviour
 
         AS = GetComponent<AudioSource>();
         clips = new AudioClip[3]{sord, yari, bow};
+
+        trans = GameoverPanel1.GetComponent<RectTransform>();
+        trans.localScale = new Vector3(1, 1, 1);
     }
 
     // Update is called once per frame
@@ -59,17 +64,17 @@ public class player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             weapon = 1;
-            set_weapon(1.5f, 1.5f, -102f);
+            set_weapon(1.5f, 1f, -102f);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             weapon = 2;
-            set_weapon(3, 1, -3f);
+            set_weapon(3, 0.8f, -3f);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             weapon = 3;
-            set_weapon(6, 0.7f, 102f);
+            set_weapon(6, 0.4f, 102f);
         }
         //攻撃
         if (Input.GetMouseButtonDown(0))
@@ -97,7 +102,10 @@ public class player : MonoBehaviour
         }
         if (hp <= 0)
         {
-            GameMaster.GetComponent<GM>().OutPanel(GameoverPanel);
+            GameOver();
+        }
+        if(hp > 0){
+            retry();
         }
     }
 
@@ -158,7 +166,7 @@ public class player : MonoBehaviour
     {
         if(can_jump && (num == 1 || num == -1))
         {
-            rb.AddForce(new Vector2(0,400f));
+            rb.AddForce(new Vector2(0,405f));
             Invoke("get_jump", 0.6f);
             can_jump = false;
         }
@@ -186,7 +194,6 @@ public class player : MonoBehaviour
         if(transform.position.y < -5)
         {
             hp = 0;
-            transform.position = savepoint.start;
         }
     
     }
@@ -211,7 +218,38 @@ public class player : MonoBehaviour
     {
         ya.SetActive(false);
     }
+    void GameOver()
+    {
+        Invoke("GameOver2", 0.53f);
 
+        GameoverPanel1.SetActive(true);
+        RectTransform trans = GameoverPanel1.GetComponent<RectTransform>();
+
+        
+        if(trans.localScale.x > 1.6f)
+        {
+            trans.localScale -= new Vector3(50 * Time.deltaTime, 50* Time.deltaTime, 0);
+        }
+    }
+    void GameOver2()
+    {
+        GameoverPanel2.SetActive(true);
+        Scene nowScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(nowScene.name);
+    }
+    void retry()
+    {
+
+        GameoverPanel1.SetActive(true);
+        
+        if(trans.localScale.x <  30f)
+        {
+            trans.localScale += new Vector3(50 * Time.deltaTime, 50* Time.deltaTime, 0);
+        }
+        else{
+            GameoverPanel1.SetActive(false);
+        }
+    }
 
     public void onDown(int i)
     {

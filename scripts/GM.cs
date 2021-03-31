@@ -73,13 +73,7 @@ public class GM : MonoBehaviour
         hp /= 6;
 　　　　　slider.value = hp;
     }
-    
-    public void OnContinue()
-    {
-       reset_panel(GameoverPanel);
-       Scene nowScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(nowScene.name);
-    }
+
     public void onMenuB()
     {
         if(!pause)

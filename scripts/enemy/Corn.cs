@@ -55,7 +55,7 @@ public class Corn : MonoBehaviour
     
     void Start()
     {
-        corn = new Enemies("corn", 2f,0.5f, this.gameObject);
+        corn = new Enemies("corn", 2f,1f, this.gameObject);
         rb = this.GetComponent<Rigidbody2D>();
         rb_tubu = corn_tubu.GetComponent<Rigidbody2D>();
         InvokeRepeating("attack_Corn", 4,3f);  

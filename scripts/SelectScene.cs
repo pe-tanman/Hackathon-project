@@ -9,7 +9,9 @@ using UnityEngine.UI;
 public class SelectScene : MonoBehaviour
 {
     public Button b_1,b_2,b_3;
+    public GameObject special;
     
+    public static bool easy;
     int stage_num;
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,10 @@ public class SelectScene : MonoBehaviour
                 stages[i].interactable = false;
             }
         }
+        if(stage_num == 3)
+        {
+            special.SetActive(true);
+        }
     }
     void Update()
     {
@@ -54,6 +60,16 @@ public class SelectScene : MonoBehaviour
     public void On3()
     {
         SceneManager.LoadScene(4);
+    }
+
+    public void On_sp(bool level)
+    {
+        easy = level;
+        SceneManager.LoadScene(6);
+    }
+    public void On_cancel()
+    {
+        special.SetActive(false);
     }
     public void OnBack()
     {

@@ -8,7 +8,7 @@ public class savepoint : MonoBehaviour
     public AudioClip save;
     static public Vector3 start; 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if(start == Vector3.zero)
         {
