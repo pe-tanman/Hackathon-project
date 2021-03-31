@@ -179,6 +179,14 @@ public class player : MonoBehaviour
         {
             hp -= dam;
             AS.PlayOneShot(dam_audio);
+            if (hp <= 0)
+            {
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+                GameObject death_anim = (GameObject)Resources.Load("prefabs/death_anime");
+                Vector3 pos = transform.position;
+                GameObject anime = Instantiate(death_anim, new Vector3 (pos.x, pos.y, pos.z -1),  Quaternion.identity);
+                Destroy(anime, 0.27f);
+            }
         }
     
     void set_weapon(float dis, float dam, float x)
@@ -228,7 +236,7 @@ public class player : MonoBehaviour
         
         if(trans.localScale.x > 1.6f)
         {
-            trans.localScale -= new Vector3(50 * Time.deltaTime, 50* Time.deltaTime, 0);
+            trans.localScale -= new Vector3(200 * Time.deltaTime, 200* Time.deltaTime, 0);
         }
     }
     void GameOver2()
@@ -242,9 +250,9 @@ public class player : MonoBehaviour
 
         GameoverPanel1.SetActive(true);
         
-        if(trans.localScale.x <  30f)
+        if(trans.localScale.x <  120f)
         {
-            trans.localScale += new Vector3(50 * Time.deltaTime, 50* Time.deltaTime, 0);
+            trans.localScale += new Vector3(200 * Time.deltaTime, 200* Time.deltaTime, 0);
         }
         else{
             GameoverPanel1.SetActive(false);
