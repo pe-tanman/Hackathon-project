@@ -110,7 +110,7 @@ public class player : MonoBehaviour
     }
 
 
-    //接地判定
+//接地判定
     void OnTriggerEnter2D(Collider2D col_enter)
     {
         num = 1;
@@ -132,6 +132,7 @@ public class player : MonoBehaviour
         num = 0.1f;
     }
 
+//基本システム
     void move(float num2)
         {
             player_dir = num2;
@@ -188,7 +189,6 @@ public class player : MonoBehaviour
                 Destroy(anime, 0.27f);
             }
         }
-    
     void set_weapon(float dis, float dam, float x)
     {
         dis_ray = dis;
@@ -197,6 +197,8 @@ public class player : MonoBehaviour
         pos.x = x;
         out_line.GetComponent<RectTransform>().anchoredPosition3D = pos;
     }
+
+//演出等
     void fall()
     {
         if(transform.position.y < -5)
@@ -205,13 +207,16 @@ public class player : MonoBehaviour
         }
     
     }
-
     void shot()
     {
         ya.transform.position = transform.position;
         ya.SetActive(true);
         ya.GetComponent<Rigidbody2D>().AddForce(new Vector2(1500 * player_dir, 100));
         Invoke("rm_ya", 0.2f);
+    }
+    void rm_ya()
+    {
+        ya.SetActive(false);
     }
     void up_hashigo()
     {
@@ -222,10 +227,7 @@ public class player : MonoBehaviour
                 }
     }
 
-    void rm_ya()
-    {
-        ya.SetActive(false);
-    }
+//出力
     void GameOver()
     {
         Invoke("GameOver2", 0.53f);
@@ -259,6 +261,7 @@ public class player : MonoBehaviour
         }
     }
 
+//入力
     public void onDown(int i)
     {
         if(i == 3)

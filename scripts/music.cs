@@ -18,8 +18,7 @@ public class Music : MonoBehaviour
     {
         if(gm != null)
         {
-            bool out_panel = gm.GetComponent<GM>().pause;
-            if(out_panel)
+            if(player.hp <= 0 || gm.GetComponent<GM>().pause)
             {
                 audioSource.enabled = false;
             }

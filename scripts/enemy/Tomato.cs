@@ -36,6 +36,10 @@ public class Tomato : MonoBehaviour
                     dir_tomato *= -1;  
                     //rb.AddForce (new Vector3(5* dir_tomato, 0, 0), ForceMode2D.Impulse);
                 }
+                if(hit.collider.tag == "Player")
+                {
+                    tomato.attack();
+                }
             }   
         }
         
@@ -44,13 +48,6 @@ public class Tomato : MonoBehaviour
     {
         tomato.RevDamage(dam);
     }
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Player")
-        {
-            tomato.attack();
-        }
-    } 
 
     void Start()
     {

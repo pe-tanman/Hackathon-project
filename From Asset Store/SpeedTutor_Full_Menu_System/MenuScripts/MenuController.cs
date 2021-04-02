@@ -173,12 +173,6 @@ namespace SpeedTutorMainMenuSystem
             StartCoroutine(ConfirmationBox());
         }
 
-        public void BrightnessSlider(float brightness)
-        {
-            brightnessEffect.brightness = brightness;
-            brightnessText.text = brightness.ToString("0.0");
-        }
-
         public void BrightnessApply()
         {
             PlayerPrefs.SetFloat("masterBrightness", brightnessEffect.brightness);

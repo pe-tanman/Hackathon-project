@@ -45,22 +45,11 @@ public class SelectScene : MonoBehaviour
             special.SetActive(true);
         }
     }
-    void Update()
+    public void Onstage(int i)
     {
-        
+        SceneManager.LoadScene(i + 1);
     }
-    public void On1()
-    {
-        SceneManager.LoadScene(2);
-    }
-    public void On2()
-    {
-        SceneManager.LoadScene(3);
-    }
-    public void On3()
-    {
-        SceneManager.LoadScene(4);
-    }
+    
 
     public void On_sp(bool level)
     {

@@ -8,15 +8,17 @@ public class Boss : MonoBehaviour
     public Enemies boss;
     public AudioClip defence;
     Rigidbody2D rb, rb_tubu;
-    public GameObject tubu, tubu1, tubu2, player, hp_bar_obj;
+    public GameObject  player, hp_bar_obj;
     public Slider hp_bar;
-    GameObject[] tubus;
+    GameObject[] children, tubus, enemy;
+
     
 
     float player_pos, pos_dif;
     float dis_ray = 1;
     int dir;
     bool rot = false;
+    bool first = true;
 
 //main move
     void move()
@@ -47,6 +49,7 @@ public class Boss : MonoBehaviour
         Invoke("change_rotate", 11f);
         Invoke("change_rotate", 14f);
         Invoke("jump_up",4f);
+        Invoke("summon", 17f);
     }
 
 //tomato
@@ -91,20 +94,29 @@ public class Boss : MonoBehaviour
     }
     void Throw()
     {   
+        
         float power = 3;
         foreach(GameObject any_tubu in tubus)
         {
-            rb_tubu = any_tubu.GetComponent<Rigidbody2D>();
-
-            any_tubu.SetActive(true);
-            
-            Vector3 pos = transform.position;
-            any_tubu.transform.position = new Vector3(pos.x + 0.5f*dir, pos.y + 0.5f, pos.z);
-            rb_tubu.AddForce(new Vector2(150 * dir* power, 80 ));
-            power /= 2;
+                any_tubu.SetActive(true);
+                rb_tubu = any_tubu.GetComponent<Rigidbody2D>();
+                Vector3 pos = transform.position;
+                any_tubu.transform.position = new Vector3(pos.x + 0.5f*dir, pos.y + 0.5f, pos.z);
+                rb_tubu.AddForce(new Vector2(150 * dir* power, 80 ));
+                power /= 2;
         }
         
         turn();
+    }
+
+//summon
+    void summon()
+    {
+        enemy = Resources.LoadAll<GameObject>("enemy");
+        foreach(GameObject obj in enemy)
+        {
+            GameObject instance = (GameObject)Instantiate(obj,transform.position,transform.rotation);
+        }
     }
 
 //system
@@ -124,7 +136,6 @@ public class Boss : MonoBehaviour
             boss.attack();
         }
     }
-    
     void hp()
     {
         Vector3 pos = player.transform.position;
@@ -135,14 +146,41 @@ public class Boss : MonoBehaviour
         }
         
     }
+
+    //other
+    GameObject[] find_children(bool active)
+    {
+        GameObject[] list = new GameObject[3];
+        int j = 0;
+        for (int i = 0; i < children.Length; i++)
+        {
+            if(transform.GetChild(i).gameObject.name != "Cube" && transform.GetChild(i).gameObject.activeSelf == active)
+            {  
+                list[i] = children[i];
+            }
+        }
+        return list;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        tubus = new GameObject[3]{tubu, tubu1, tubu2};
+        children = new GameObject[transform.childCount];
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if(transform.GetChild(i).gameObject.name != "Cube")
+            {
+                children[i] = transform.GetChild(i).gameObject;
+            }
+        }
+        
+        Debug.Log(children[1]);
+
+        tubus = find_children(true);
+
         boss = new Enemies("boss", 50, 1.5f, this.gameObject);
         rb = this.gameObject.GetComponent<Rigidbody2D>();
         
-        InvokeRepeating("jump", 3f, 17f); 
+        InvokeRepeating("jump", 3f, 20f); 
         turn();
     }
 
@@ -158,5 +196,6 @@ public class Boss : MonoBehaviour
         else{
            move(); 
         }
+
     }
 }

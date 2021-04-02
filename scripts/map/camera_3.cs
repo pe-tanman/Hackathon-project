@@ -22,7 +22,7 @@ public class camera_3 : MonoBehaviour
             this.GetComponent<Camera>().orthographicSize = 9;
             transform.position = new Vector3(338, 13, -7);
         }
-        else if(pos.x >= 630 && pos.x <= 680)
+        else if(pos.x >= 630 && pos.x <= 690)
         {
             if(first1)
             {
