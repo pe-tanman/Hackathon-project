@@ -13,18 +13,4 @@ public class TitleScene : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-    
-    }   
-
-    public void OnNew()
-    {
-        File.Delete("Assets/savedata.json");
-        SceneManager.LoadScene(1);
-    }
-    public void OnLoad()
-    {
-        SceneManager.LoadScene(1);
-    }
 }

@@ -244,7 +244,7 @@ namespace SpeedTutorMainMenuSystem
             //NewGame
             if (ButtonType == "Yes")
             {
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(7);
                 File.Delete("Assets/savedata.json");
 
             }
